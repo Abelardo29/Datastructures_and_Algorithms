@@ -11,12 +11,11 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
             int amountOfTimes = 5000;
-            Stopwatch stopwatch1 = new Stopwatch(), stopwatch2 = new Stopwatch();
+            Stopwatch stopwatch1 = new Stopwatch(), stopwatch2 = new Stopwatch();//ik heb alvast dit toegevoegd om correct tijd te berekenen, aangezien het toch niet zoveel moeite was.
 
             
-            //timer van de eerste opdracht, samen met de eerste oprachten.
             stopwatch1.Start();
-            for (int i = 0; i < amountOfTimes; i++)
+            for (int i = 0; i < amountOfTimes; i++)//dit is opdracht 1 + 2
             {
                 int[] highscore = new int[100];
                 for (int j = 0; j < highscore.Length; j++)
@@ -33,11 +32,11 @@ namespace ConsoleApplication1
 
             //timer van opdracht 3en 4 start hier.
             stopwatch2.Start();
-            for (int i = 0; i < amountOfTimes; i++)
+            for (int i = 0; i < amountOfTimes; i++)//dit WORD opdracht 3 + 4
             {
                 int[] elements = new int[10000];
 
-                if (Run(elements, 100))
+                if (AddRandomNumbers(elements, 100))
                     dub++;//dit is nog niet opdracht 4 proper, hier returned ie inplaats van duplicates het aantal keren dat ie boven de 1 komt met die random getallen optellen.
             }
             stopwatch2.Stop();
@@ -59,13 +58,13 @@ namespace ConsoleApplication1
                     {//Zoals ik het atm zie hoeven we niet te checken op meerdere dubbelen, gewoon als ie 1 keer een dubbele find meteen de loop stoppen en rapporteren dus, bespaart tijd
                      //Console.WriteLine("Same score! " + currentArray[i] + " spot " + (i + 1) + " spot " + (j + 1));
                         dub++;
-                        //Console.WriteLine("no");
+                        Console.WriteLine("no");
                         return;
                     }
                 }
             }
 
-            //Console.WriteLine("yes");
+            Console.WriteLine("yes");
         }
 
         public static void Results(int doubles, Stopwatch currentStopwatch)
@@ -74,7 +73,7 @@ namespace ConsoleApplication1
             Console.WriteLine("Time elapsed: {0}", currentStopwatch.Elapsed);
         }
 
-        public static bool Run(int[] currentArray, int addMultiplier)
+        public static bool AddRandomNumbers(int[] currentArray, int addMultiplier)
         {
             for (int i = 1; i < addMultiplier; i++)
                 currentArray[r.Next(currentArray.Length)]++;
