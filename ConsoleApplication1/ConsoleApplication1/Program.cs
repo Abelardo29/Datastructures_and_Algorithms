@@ -7,7 +7,7 @@ namespace ConsoleApplication1
     {
         static int dub = 0;
         static Random r = new Random();
-
+        // test
         static void Main(string[] args)
         {
             int amountOfTimes = 5000;
