@@ -5,7 +5,7 @@ namespace Assignment1
 {
     class Program
     {
-        static int dub = 0;
+        static int dub = 0, dub2 = 0, higher = 0;
         static Random r = new Random();
         // test
         static void Main(string[] args)
@@ -24,7 +24,8 @@ namespace Assignment1
                     //Console.WriteLine("This is spot = " + (j + 1) + " met nummer " + highscore[i]);
                 }
 
-                CalculateDoubles(highscore);
+                if (CalculateDoubles(highscore))
+                    dub++;
             }
             stopwatch1.Stop();
 
@@ -37,16 +38,27 @@ namespace Assignment1
                 int[] elements = new int[10000];
 
                 if (AddRandomNumbers(elements, 100))
-                    dub++;//dit is nog niet opdracht 4 proper, hier returned ie inplaats van duplicates het aantal keren dat ie boven de 1 komt met die random getallen optellen.
+                {
+                    Console.WriteLine("Number higher than 1");
+                    higher++;
+                }
+                    
+                if (CalculateDoubles(elements))
+                    dub2++;
             }
             stopwatch2.Stop();
 
-            Results(dub, stopwatch2);
+            Results(dub2, stopwatch2);
+            Console.WriteLine("This one is for how many numbers are higher than 1");
+            Results(higher, stopwatch2);
 
             Console.ReadLine();
         }
 
-        public static void CalculateDoubles(int[] currentArray)
+
+
+
+        public static bool CalculateDoubles(int[] currentArray)
         {
             
 
@@ -57,19 +69,19 @@ namespace Assignment1
                     if (i != j && currentArray[i] == currentArray[j] && currentArray[i] != 0)
                     {//Zoals ik het atm zie hoeven we niet te checken op meerdere dubbelen, gewoon als ie 1 keer een dubbele find meteen de loop stoppen en rapporteren dus, bespaart tijd
                      //Console.WriteLine("Same score! " + currentArray[i] + " spot " + (i + 1) + " spot " + (j + 1));
-                        dub++;
                         Console.WriteLine("no");
-                        return;
+                        return true;
                     }
                 }
             }
 
             Console.WriteLine("yes");
+            return false;
         }
 
         public static void Results(int doubles, Stopwatch currentStopwatch)
         {
-            Console.WriteLine("Amount of double = " + doubles);
+            Console.WriteLine("Amount = " + doubles);
             Console.WriteLine("Time elapsed: {0}", currentStopwatch.Elapsed);
         }
 
