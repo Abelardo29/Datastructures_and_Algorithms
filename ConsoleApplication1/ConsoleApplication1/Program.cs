@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace ConsoleApplication1
+namespace Assignment1
 {
     class Program
     {
