@@ -13,7 +13,8 @@ namespace Assignment1
             int amountOfTimes = 5000;
             Stopwatch stopwatch1 = new Stopwatch(), stopwatch2 = new Stopwatch();//ik heb alvast dit toegevoegd om correct tijd te berekenen, aangezien het toch niet zoveel moeite was.
 
-            
+            Console.WriteLine("Starting run!");
+            Console.WriteLine("Starting stopwatch 1!");
             stopwatch1.Start();
             for (int i = 0; i < amountOfTimes; i++)//dit is opdracht 1 + 2
             {
@@ -28,18 +29,15 @@ namespace Assignment1
                     dub++;
             }
             stopwatch1.Stop();
-
-            Results(dub, stopwatch1);
-
-            //timer van opdracht 3en 4 start hier.
+            Console.WriteLine("Stopwatch 1 is done. Starting stopwatch 2!");
             stopwatch2.Start();
-            for (int i = 0; i < amountOfTimes; i++)//dit WORD opdracht 3 + 4
+            for (int i = 0; i < amountOfTimes; i++)//dit IS opdracht 3 + 4
             {
                 int[] elements = new int[10000];
 
                 if (AddRandomNumbers(elements, 100))
                 {
-                    Console.WriteLine("Number higher than 1");
+                    //Console.WriteLine("Number higher than 1");
                     higher++;
                 }
                     
@@ -48,8 +46,14 @@ namespace Assignment1
             }
             stopwatch2.Stop();
 
+            Console.WriteLine("Running done, press Enter for results!");
+            Console.ReadLine();
+
+            Console.WriteLine("Eerste stopwatch:");
+            Results(dub, stopwatch1);
+            Console.WriteLine("Tweede stopwatch:");
             Results(dub2, stopwatch2);
-            Console.WriteLine("This one is for how many numbers are higher than 1");
+            Console.WriteLine("This one is for how many numbers are higher than 1:");
             Results(higher, stopwatch2);
 
             Console.ReadLine();
@@ -69,13 +73,13 @@ namespace Assignment1
                     if (i != j && currentArray[i] == currentArray[j] && currentArray[i] != 0)
                     {//Zoals ik het atm zie hoeven we niet te checken op meerdere dubbelen, gewoon als ie 1 keer een dubbele find meteen de loop stoppen en rapporteren dus, bespaart tijd
                      //Console.WriteLine("Same score! " + currentArray[i] + " spot " + (i + 1) + " spot " + (j + 1));
-                        Console.WriteLine("no");
+                        //Console.WriteLine("no");
                         return true;
                     }
                 }
             }
 
-            Console.WriteLine("yes");
+            //Console.WriteLine("yes");
             return false;
         }
 
