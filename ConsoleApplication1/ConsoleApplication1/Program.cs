@@ -10,7 +10,7 @@ namespace Assignment1
         // test
         static void Main(string[] args)
         {
-            int amountOfTimes = 5000;
+            int amountOfTimes = 1000;
             Stopwatch stopwatch1 = new Stopwatch(), stopwatch2 = new Stopwatch();//ik heb alvast dit toegevoegd om correct tijd te berekenen, aangezien het toch niet zoveel moeite was.
 
             Console.WriteLine("Starting run!");
@@ -18,7 +18,7 @@ namespace Assignment1
             stopwatch1.Start();
             for (int i = 0; i < amountOfTimes; i++)//dit is opdracht 1 + 2
             {
-                int[] highscore = new int[100];
+                int[] highscore = new int[800];
                 for (int j = 0; j < highscore.Length; j++)
                 {
                     highscore[j] = r.Next(0, 10000);
@@ -35,7 +35,7 @@ namespace Assignment1
             {
                 int[] elements = new int[10000];
 
-                if (AddRandomNumbers(elements, 100))
+                if (AddRandomNumbers(elements, 800))
                 {
                     //Console.WriteLine("Number higher than 1");
                     higher++;
