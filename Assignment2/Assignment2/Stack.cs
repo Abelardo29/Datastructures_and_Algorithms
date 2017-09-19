@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment2 {
+﻿namespace Assignment2 {
     class CustomStack {
         public int top = -1, maxSize;
         protected string[] stackName;
