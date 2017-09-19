@@ -17,7 +17,7 @@ namespace Assignment2 {
         public void Push(string content) {
             if (!IsFull()) {
                 top++;
-                stackName[top] = content;
+                stackName[top] = content;                
             }
         }
 
