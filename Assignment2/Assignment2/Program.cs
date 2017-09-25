@@ -31,8 +31,8 @@ namespace Assignment2 {
                 Console.WriteLine("Adding " + userInput + " to queue!\n");                
                 Console.WriteLine();
             }
-
             thisQueue.printQueue();
+            thisQueue.printRecursive2(thisQueue._front);
             Console.WriteLine("Queue Program finished.");
             Console.ReadLine();
         }
