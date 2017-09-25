@@ -8,7 +8,7 @@ namespace Assignment2 {
     class Program {
         static void Main(string[] args) {
 
-            //StackThings();
+            StackThings();
 
             QueueThings(20);
 
@@ -28,11 +28,11 @@ namespace Assignment2 {
                 }
                 thisQueue.Enqueue(userInput);
 
-                Console.WriteLine("Adding " + userInput + " to queue!\n");
-                thisQueue.printQueue();
+                Console.WriteLine("Adding " + userInput + " to queue!\n");                
                 Console.WriteLine();
             }
 
+            thisQueue.printQueue();
             Console.WriteLine("Queue Program finished.");
             Console.ReadLine();
         }
