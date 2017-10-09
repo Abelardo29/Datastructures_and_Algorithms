@@ -94,6 +94,7 @@ namespace Assignment3 {
                         return GetEnum(options[i]);
                     }
                 }
+                Console.WriteLine("Doing nothin' since i appearently got no command.");
             }
 
         }
