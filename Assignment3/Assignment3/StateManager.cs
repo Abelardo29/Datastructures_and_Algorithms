@@ -31,10 +31,11 @@ namespace Assignment3 {
         string robbingBank, havingGoodTime, fleeing, layingLow;
 
         public StateManager() {
-            robbingBank = getRich + "/" + spotCop + "," + getRichText + "/" + spotCopText;
-            havingGoodTime = spotCop + "/" + GetTired + "," + spotCopText + "/" + getTiredText;
-            fleeing = feelSafe + "/" + GetTired + "/" + GetTired + "+" + getRich + "," + feelSafeText + "/" + getTiredText + "/" + getTiredText + " and " + getRichText;
-            layingLow = spotCop + "/" + feelSafe + "," + spotCopText + "/" + feelSafeText;
+            robbingBank = getRich + "/" + spotCop + "*" + getRichText + "/" + spotCopText;
+            havingGoodTime = spotCop + "/" + GetTired + "*" + spotCopText + "/" + getTiredText;
+            fleeing = feelSafe + "/" + GetTired + "/" + GetTired + "+" + getRich + "*" 
+                + feelSafeText + "/" + getTiredText + "/" + getTiredText + " and " + getRichText;
+            layingLow = spotCop + "/" + feelSafe + "*" + spotCopText + "/" + feelSafeText;
         }
 
 
@@ -71,11 +72,11 @@ namespace Assignment3 {
         }
 
         private STATE Situation(string input) {
-            string[] seperate = input.Split(',');
+            string[] seperate = input.Split('*');
             string[] options = seperate[0].Split('/');
             string[] dialogue = seperate[1].Split('/');
 
-            Console.WriteLine("What should i do? ");
+            Console.WriteLine("....What should i do? \n");
             Console.Write("I can do nothing");
 
             for (int i = 0; i < options.Length; i++) {
@@ -86,6 +87,7 @@ namespace Assignment3 {
 
             while (true) {
                 string userInput = Console.ReadLine();
+                Console.WriteLine();
                 for (int i = 0; i < options.Length; i++) {
                     if (userInput.Equals(options[i])) {
                         Console.WriteLine(dialogue[i]);
@@ -101,11 +103,13 @@ namespace Assignment3 {
                 case getRich:
                     return STATE.HAVING_GOOD_TIME;
                 case spotCop:
-                    return STATE.LAYINGLOW;
+                    return STATE.FLEEING;
                 case feelSafe:
                     return STATE.ROBBING_BANK;
                 case GetTired:
                     return STATE.LAYINGLOW;
+                case GetTired + "+" + getRich:
+                    return STATE.HAVING_GOOD_TIME;
                 default:
                     return start;
             }
