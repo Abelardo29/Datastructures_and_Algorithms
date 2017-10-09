@@ -76,7 +76,7 @@ namespace Assignment3 {
             string[] options = seperate[0].Split('/');
             string[] dialogue = seperate[1].Split('/');
 
-            Console.WriteLine("....What should i do? \n");
+            Console.WriteLine("....What should I do? \n");
             Console.Write("I can do nothing");
 
             for (int i = 0; i < options.Length; i++) {
@@ -94,7 +94,7 @@ namespace Assignment3 {
                         return GetEnum(options[i]);
                     }
                 }
-                Console.WriteLine("Doing nothin' since i appearently got no command.");
+                Console.WriteLine("Doing nothin' since I appearently got no command.");
             }
 
         }
