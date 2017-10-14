@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Assignment3 {
     class Program {
+        static RobberV2 npc = new RobberV2();
         static void Main(string[] args) {
-            Robber npc = new Robber();
+            Stopwatch npcStopwatch = new Stopwatch();
+            npcStopwatch.Start();
+            float startTime = npcStopwatch.ElapsedMilliseconds;
             npc.GetNextScreen(npc.start);
 
-            do {
-
-                //something
-
-            } while (npc.currentState != Robber.STATE.CAUGHT);
+            while (true) {
+                if (npcStopwatch.ElapsedMilliseconds > startTime + 1000) {
+                    npc = new RobberV2();
+                    break;
+                }
+            }
 
             Console.ReadLine();
         }
+
     }
 }
