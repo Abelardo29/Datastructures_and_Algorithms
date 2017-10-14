@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 namespace Assignment3 {
     class Program {
         static void Main(string[] args) {
-            StateManager robbingState = new StateManager();
-            robbingState.GetNextScreen(robbingState.start);
-                Console.ReadLine();
+            Robber npc = new Robber();
+            npc.GetNextScreen(npc.start);
+
+            do {
+
+                //something
+
+            } while (npc.currentState != Robber.STATE.CAUGHT);
+
+            Console.ReadLine();
         }
     }
 }

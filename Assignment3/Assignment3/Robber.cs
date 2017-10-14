@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Assignment3 {
-    class StateManager {
+    class Robber {
 
         public enum STATE {
             ROBBING_BANK,
             HAVING_GOOD_TIME,
             FLEEING,
-            LAYINGLOW
+            LAYINGLOW,
+            CAUGHT
         }
+
+        public STATE currentState;
 
         private const string
             whileRobbing = "I'm robbing banks and getting loads of money! Pew pew!",
@@ -30,7 +33,14 @@ namespace Assignment3 {
 
         string robbingBank, havingGoodTime, fleeing, layingLow;
 
-        public StateManager() {
+
+
+        public int 
+            wealth = 0, 
+            distanceToCop, 
+            strength;
+
+        public Robber() {
             robbingBank = getRich + "/" + spotCop + "*" + getRichText + "/" + spotCopText;
             havingGoodTime = spotCop + "/" + GetTired + "*" + spotCopText + "/" + getTiredText;
             fleeing = feelSafe + "/" + GetTired + "/" + GetTired + "+" + getRich + "*" 
@@ -38,16 +48,14 @@ namespace Assignment3 {
             layingLow = spotCop + "/" + feelSafe + "*" + spotCopText + "/" + feelSafeText;
         }
 
-
-
-
-        List<string> optionList = new List<string>();
-        List<string> responseList = new List<string>();
-
         public STATE start = STATE.ROBBING_BANK;
-        private int moneyCurrent = 0;
 
+        //Hierdoor switched de statemanager van state, je geeft hem een nieuwe state, 
+        //en dan gaat ie de situatie uitvoeren met de correcte state en voert daarna meteen deze methode opnieuw uit.
+        //Hoera voor (semi) recursiveness!
         public void GetNextScreen(STATE currentState) {
+            this.currentState = currentState;
+            
             switch (currentState) {
                 case STATE.ROBBING_BANK:
                     Console.WriteLine(whileRobbing);
@@ -68,6 +76,9 @@ namespace Assignment3 {
                     Console.WriteLine(whileLayingLow);
                     GetNextScreen(Situation(layingLow));
                     break;
+                case STATE.CAUGHT:
+                    Console.WriteLine(":(");
+                    break;
             }
         }
 
@@ -80,13 +91,13 @@ namespace Assignment3 {
             Console.Write("I can do nothing");
 
             for (int i = 0; i < options.Length; i++) {
-                Console.Write(" or " + options[i]);
+                Console.Write(" || " + options[i]);
             }
 
             Console.WriteLine();
 
             while (true) {
-                string userInput = Console.ReadLine();
+                string userInput = Console.ReadLine(); 
                 Console.WriteLine();
                 for (int i = 0; i < options.Length; i++) {
                     if (userInput.Equals(options[i])) {
