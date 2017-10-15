@@ -1,21 +1,22 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Assignment3 {
-    class Program {
-        static RobberV2 npc = new RobberV2();
+    class Program {        
         static void Main(string[] args) {
-            Stopwatch npcStopwatch = new Stopwatch();
-            npcStopwatch.Start();
-            float startTime = npcStopwatch.ElapsedMilliseconds;
-            npc.GetNextScreen(npc.start);
 
-            while (true) {
-                if (npcStopwatch.ElapsedMilliseconds > startTime + 1000) {
-                    npc = new RobberV2();
-                    break;
-                }
-            }
+            RobberV2 npcRobber = new RobberV2();
+            Cop npcCop = new Cop(50, npcRobber);
+
+            npcRobber.GetNextScreen(npcRobber.start);
+            npcCop.GetNextScreen(npcCop.start);
+
+            do {
+                //System.Threading.Thread.Sleep(1000);
+                npcRobber.GetNextScreen(npcRobber.currentState);
+                //System.Threading.Thread.Sleep(1000);
+                npcCop.GetNextScreen(npcCop.currentState);
+
+            } while (npcRobber.currentState != RobberV2.STATE.CAUGHT  || npcCop.currentState != Cop.STATE.CAUGHT_ROBBER);
 
             Console.ReadLine();
         }

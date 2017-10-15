@@ -34,12 +34,6 @@ namespace Assignment3 {
         string robbingBank, havingGoodTime, fleeing, layingLow;
 
 
-
-        public int 
-            wealth = 0, 
-            distanceToCop, 
-            strength;
-
         public Robber() {
             robbingBank = getRich + "/" + spotCop + "*" + getRichText + "/" + spotCopText;
             havingGoodTime = spotCop + "/" + GetTired + "*" + spotCopText + "/" + getTiredText;

@@ -43,105 +43,112 @@ namespace Assignment3 {
 
         public int
             wealth = 0,
-            distanceToCop,
+            distanceToCop = 100,
             strength = 150;
+
         public STATE start = STATE.ROBBING_BANK;//note dat het startsein in de program class wordt gegeven.
 
         //Hierdoor switched de statemanager van state, je geeft hem een nieuwe state, 
         //en dan gaat ie de situatie uitvoeren met de correcte state en voert daarna meteen deze methode opnieuw uit.
         //Hoera voor (semi) recursiveness!
         public void GetNextScreen(STATE currentState) {
-            if (this.currentState != STATE.CAUGHT) {
-                this.currentState = currentState;
-            }
-            Console.WriteLine();
-            switch (this.currentState) {
-                case STATE.ROBBING_BANK:
-                    Console.WriteLine(whileRobbing);
-                    GetNextScreen(Situation(robbingBank));
-                    break;
 
-                case STATE.HAVING_GOOD_TIME:
-                    Console.WriteLine(whileHavingGoodTime);
-                    GetNextScreen(Situation(havingGoodTime));
-                    break;
+                if (currentState != STATE.CAUGHT)
+                    this.currentState = currentState;
 
-                case STATE.FLEEING:
-                    Console.WriteLine(whileFleeing);
-                    GetNextScreen(Situation(fleeing));
-                    break;
+                Console.WriteLine();
+                switch (this.currentState) {
+                    case STATE.ROBBING_BANK:
+                        Say(whileRobbing);
+                        this.currentState = (Situation(robbingBank));
+                        break;
 
-                case STATE.LAYINGLOW:
-                    Console.WriteLine(whileLayingLow);
-                    GetNextScreen(Situation(layingLow));
-                    break;
-                case STATE.CAUGHT:
-                    Console.WriteLine(":(");
-                    break;
+                    case STATE.HAVING_GOOD_TIME:
+                        Say(whileHavingGoodTime);
+                        this.currentState = (Situation(havingGoodTime));
+                        break;
+
+                    case STATE.FLEEING:
+                        Say(whileFleeing);
+                        this.currentState = (Situation(fleeing));
+                        break;
+
+                    case STATE.LAYINGLOW:
+                        Say(whileLayingLow);
+                        this.currentState = (Situation(layingLow));
+                        break;
+
+                    case STATE.CAUGHT:
+                        Say(":(");
+                        this.currentState = STATE.CAUGHT;
+                        break;
+
+                
+               
             }
         }
 
         private STATE Situation(string input) {
-             distanceToCop = r.Next(100);
+             //distanceToCop = r.Next(100);
 
-            Console.WriteLine("I am now this rich: " + wealth);
+            Say("I am now this rich: " + wealth);
 
             switch (input) {
                 case robbingBank:
-                    Console.WriteLine("I am now this strong: " + strength);
-                    if (copClose()) {
-                        Console.WriteLine(spotCopText);
+                    Say("I am now this strong: " + strength);
+                    if (CopClose) {
+                        Say(spotCopText);
                         return GetEnum(spotCop);
 
                     }
-                    else if (strength > 50) {
+                    else if (StrongEnough) {
 
                         strength -= 50;
                         int plunder = 100 + r.Next(200);
-                        Console.WriteLine("I just stole " + plunder + "!"
+                        Say("I just stole " + plunder + "!"
                             + "\n And i'm still feeling pretty safe!");
                         wealth += plunder;
                         return GetEnum(feelSafe);
 
                     }
-                    else if (wealth > 200) {
+                    else if (RichEnough) {
 
-                        Console.WriteLine("Too tired to rob more banks. :(");
+                        Say("Too tired to rob more banks. :(");
                         return GetEnum(getRich);
 
                     }
                     else {
 
-                        Console.WriteLine("Too tired to rob banks properly..");
+                        Say("Too tired to rob banks properly..");
                         return GetEnum(GetTired);
                     }
 
                 case havingGoodTime:
-                    wealth -= 100;
+                    wealth -= 200;
 
-                    if (copClose()) {
-                        Console.WriteLine(spotCopText);
+                    if (CopClose) {
+                        Say(spotCopText);
                         return GetEnum(spotCop);
 
                     }
-                    else if (wealth > 100) {
+                    else if (StillRich) {
 
                         return GetEnum(getRich);
 
                     }
                     else {
 
-                        Console.WriteLine("I ran out of money!");
+                        Say("I ran out of money!");
                         return GetEnum(GetTired);
                     }
                 case fleeing:
 
-                    if (copClose()) {
-                        Console.WriteLine(spotCopText);
+                    if (CopClose) {
+                        Say(spotCopText);
                         return GetEnum(spotCop);
 
                     }
-                    else if (wealth > 200) {
+                    else if (RichEnough) {
 
                         Console.Write("I escaped. " + getRichText);
                         return GetEnum(getRich);
@@ -149,33 +156,33 @@ namespace Assignment3 {
                     }
                     else {
 
-                        Console.WriteLine(getTiredText);
+                        Say(getTiredText); 
                         return GetEnum(GetTired);
                     }
                 case layingLow:
                     int recovery = 20 + r.Next(100);
-                    Console.WriteLine("I've recovered " + recovery + " strength!");
+                    Say("I've recovered " + recovery + " strength!");
                     strength += recovery;
-                    Console.WriteLine("I am now this strong: " + strength);
+                    Say("I am now this strong: " + strength);
 
-                    if(copClose()) {
-                        Console.WriteLine(spotCopText);
+                    if(CopClose) {
+                        Say(spotCopText);
                         return GetEnum(spotCop);
 
                     }
-                    else if (strength > 80) {
+                    else if (RegainedEnoughStrength) {
 
                         return GetEnum(feelSafe);
 
                     }
                     else {
 
-                        Console.WriteLine(getTiredText);
+                        Say(getTiredText);
                         return GetEnum(GetTired);
                     }
 
                 default:
-                    Console.WriteLine("Unrecognized String in state switch. Fix it.");
+                    Say("Unrecognized String in state switch. Fix it.");
                     return GetEnum(GetTired);
             }
 
@@ -194,14 +201,33 @@ namespace Assignment3 {
                 case GetTired + "+" + getRich:
                     return STATE.HAVING_GOOD_TIME;
                 default:
-                    Console.WriteLine("Enum conversion has gone seriously wrong, fix it.");
+                    Say("Enum conversion has gone seriously wrong, fix it.");
                     return start;
             }
         }
 
-        public bool copClose() {
-            return distanceToCop < 10;
+        public bool CopClose {
+            get { return distanceToCop < 10; }
         }
 
+        public bool RichEnough {
+            get { return wealth > 200; }
+        }
+
+        public bool StillRich {
+            get { return wealth > 100; }
+        }
+
+        public bool StrongEnough {
+            get { return strength > 50; }
+        }
+
+        public bool RegainedEnoughStrength {
+            get { return strength > 80; }
+        }
+
+        public void Say (string input) {
+            Console.WriteLine("Robber: " + input);
+        }
     }
 }
