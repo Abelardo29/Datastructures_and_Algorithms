@@ -26,20 +26,32 @@ namespace Assignment2 {
         public void Enqueue(string param) {
             queueArray[rear++] = param;
         }
+
+        public void ReverseQueue (string param) {
+            for (int i = rear++ - 1; i >= 0; i--) 
+                queueArray[i + 1] = queueArray[i];
+
+            queueArray[front + 1] = param;
+            
+        }
+
         public string Dequeue() {
             return queueArray[front++];
         }
+
         public string Front() {
             return queueArray[front];
         }
+
         public bool IsEmpty() {
             return front == rear;
         }
+
         public int Size() {
             return rear - front;
         }
 
-        public void printQueue() {
+        public void PrintQueue() {
             for (int i = 0; i < rear; i++) {
                 if (i == front)
                     Console.WriteLine("QUEUE STARTS HERE, IF THERE'S ANYTHING BEFORE IT THEN THAT IS ALREADY DONE");
@@ -48,7 +60,7 @@ namespace Assignment2 {
             Console.WriteLine();
         }
 
-        public void printRecursive(int i)
+        public void PrintRecursive(int i)
         {
             if(i == front)
             {
@@ -57,11 +69,11 @@ namespace Assignment2 {
             else
             {
                 Console.WriteLine("Spot: " + i + " With contents: " + queueArray[i]);
-                printRecursive(--i);
+                PrintRecursive(--i);
             }
         }
 
-        public void printRecursive2(int i , int recursionCounter = 0)
+        public void PrintRecursive2(int i , int recursionCounter = 0)
         {
             Console.WriteLine(i + " i/rc " + recursionCounter);
             if (i == rear)
@@ -71,7 +83,7 @@ namespace Assignment2 {
             else
             {
                 Console.WriteLine("Spot: " + i + " With contents: " + queueArray[i]);
-                printRecursive2(++i, ++recursionCounter);
+                PrintRecursive2(++i, ++recursionCounter);
             }
         }
     }

@@ -7,7 +7,7 @@ namespace Assignment2 {
                 
         static void Main(string[] args) {
 
-            Stopwatch stackStopwatch = new Stopwatch();
+            /*Stopwatch stackStopwatch = new Stopwatch();
             Stopwatch queueStopwatch = new Stopwatch();
 
             List<long> stackTimes = new List<long>();
@@ -58,7 +58,9 @@ namespace Assignment2 {
                 if (counter > 100)
                     break;
             }
-            Console.WriteLine("Average time: " + (total / amountOfTimes));
+            Console.WriteLine("Average time: " + (total / amountOfTimes));*/
+
+            QueueThings(20);
 
             Console.ReadLine();
         }
@@ -103,13 +105,13 @@ namespace Assignment2 {
 
                     break;
                 }
-                thisQueue.Enqueue(userInput);
+                thisQueue.ReverseQueue(userInput);
 
                 Console.WriteLine("Adding " + userInput + " to queue!\n");                
                 Console.WriteLine();
             }
-            thisQueue.printQueue();
-            thisQueue.printRecursive2(thisQueue._front);
+            thisQueue.PrintQueue();
+            //thisQueue.PrintRecursive2(thisQueue._front);
             Console.WriteLine("Queue Program finished.");
             Console.ReadLine();
         }
